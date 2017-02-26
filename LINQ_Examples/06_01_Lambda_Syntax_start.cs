@@ -106,10 +106,10 @@ namespace LINQ_Examples
             //Exercise3();
             //Exercise4();
             //Exercise5();
-            //Exercise6();
-            Exercise7();
+            Exercise6();
+            //Exercise7();
             Console.ReadKey();
-            
+
         }
         private static void Exercise1()
         {
@@ -257,7 +257,7 @@ namespace LINQ_Examples
             }
             foreach (string name in listOfFirst)
             {
-                if(currentLetter != name[0] || firstTime)
+                if (currentLetter != name[0] || firstTime)
                 {
                     Console.WriteLine(name[0]);
                     currentLetter = name[0];
@@ -286,21 +286,49 @@ namespace LINQ_Examples
         }
         private static void Exercise6()
         {
-            Console.WriteLine("Customers' names that have different starting letter in their first and last name:\n");
-            foreach (Customer customer in customers)
+            // showing the names that are with different first letter in the first and last name of a current customer
+            //Console.WriteLine("Customers' names that have different starting letter in their first and last name:\n");
+            /*foreach (Customer customer in customers)
             {
                 if(customer.First[0] != customer.Last[0])
                 {
                     Console.WriteLine(customer.First + " " + customer.Last);
                 }
+            } */
+            Console.WriteLine("Letters that are not the same in any first or last names of the customers:\n");
+            List<Customer> listOfCustWhichLettersMatch = new List<Customer>();
+            List<Customer> passingCustomers = new List<Customer>();
+
+            foreach (Customer customer in customers)
+            {
+                listOfCustWhichLettersMatch.Add(customer);
+            }
+            foreach (Customer customer1 in listOfCustWhichLettersMatch)
+            {
+                int i = 0;
+                foreach (Customer customer2 in listOfCustWhichLettersMatch)
+                {
+                    if (customer1.First[0].Equals(customer2.Last[0]))
+                    {
+                        i++;
+                    }
+                }
+                if (i == 0)
+                {
+                    passingCustomers.Add(customer1);
+                }
+            }
+            foreach (Customer customer in passingCustomers)
+            {
+                Console.WriteLine(customer.First[0]);
             }
         }
         private static void Exercise7()
         {
             Console.WriteLine("Customers that contain \"ed\" in their first name:\n ");
-            foreach(Customer customer in customers)
+            foreach (Customer customer in customers)
             {
-                if(customer.First.Contains("ed"))
+                if (customer.First.Contains("ed") == true)
                 {
                     Console.WriteLine(customer.First);
                 }
